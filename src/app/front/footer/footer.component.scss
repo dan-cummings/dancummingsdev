@@ -1,0 +1,13 @@
+@import "~src/sass/variables";
+
+#footer {
+  position: bottom;
+  font-family: 'Krub', sans-serif;
+  background-color: $primaryColor;
+  .personal {
+    color: $highlightColor;
+    font-size: 16px;
+    margin: 0px;
+    padding: 8px 8px;
+  }
+}
