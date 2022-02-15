@@ -1,0 +1,10 @@
+@import './variables.scss';
+
+.container {
+  height: calc(100% - 60px);
+  color: white;
+}
+
+.highlight {
+  color: $highlight-color-2;
+}
