@@ -1,22 +1,22 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Terminal from '../components/Terminal'
-import Welcome from '../components/Welcome'
-import styles from '../styles/Home.module.scss'
+import type { NextPage } from 'next';
+import Head from 'next/head';
+import Terminal from '../components/Terminal';
+import TerminalInput from '../components/terminal-input/terminal-input';
+import styles from '../styles/Home.module.scss';
 
 const Home: NextPage = () => {
   return (
-      <div className={styles.container}>
+    <div className={styles.container}>
       <Head>
         <title>Home</title>
         <meta name="description" content="Homepage for dancummings.dev" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Terminal>
-        <Welcome></Welcome>
+        <TerminalInput location="~" input="" />
       </Terminal>
-      </div>
-  )
-}
+    </div>
+  );
+};
 
-export default Home
+export default Home;

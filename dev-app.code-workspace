@@ -1,0 +1,20 @@
+{
+  "folders": [
+    {
+      "name": "~",
+      "path": "."
+    },
+    {
+      "name": "apps/dev-app",
+      "path": "apps/dev-app"
+    },
+    {
+      "name": "apps/api",
+      "path": "apps/api"
+    },
+    {
+      "name": "libs/common",
+      "path": "libs/common"
+    }
+  ]
+}
