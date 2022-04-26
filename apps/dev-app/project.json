@@ -19,7 +19,8 @@
       "executor": "@nrwl/next:server",
       "options": {
         "buildTarget": "dev-app:build",
-        "dev": true
+        "dev": true,
+        "proxyConfig": "apps/dev-app/proxy.conf.json"
       },
       "configurations": {
         "production": {
