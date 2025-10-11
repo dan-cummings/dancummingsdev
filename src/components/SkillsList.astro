@@ -1,0 +1,31 @@
+---
+import SkillCard from './SkillCard.astro';
+
+interface Props {
+    skills: {
+        icon: string;
+        title: string;
+        skills: string[];
+    }[];
+}
+
+const { skills } = Astro.props;
+---
+
+<section id="skills" class="py-20 bg-white">
+    <div class="w-full max-w-6xl mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Skills & Technologies</h2>
+            <p class="text-xl text-dark-cyan max-w-2xl mx-auto">
+                Here are the tools and technologies I work with to bring ideas to life
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <!-- Frontend Skills -->
+            {skills.map((skill) => (
+                <SkillCard {...skill} />
+            ))}
+        </div>
+    </div>
+</section>

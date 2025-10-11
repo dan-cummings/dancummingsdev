@@ -1,0 +1,162 @@
+---
+ import '../styles/global.css'
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import SocialLinks from '../components/SocialLinks.astro';
+import { marked } from 'marked';
+import SkillsList from '../components/SkillsList.astro';
+import ExperienceTimeline from '../components/ExperienceTimeline.astro';
+
+type Props = CollectionEntry<'pages'>['data'];
+
+const { title, description, headerImage, content } = Astro.props;
+const skills = [
+	{
+		title: 'Frontend',
+		skills: ['React', 'Vue', 'Astro'],
+		icon: 'FE',
+	},
+	{
+		title: 'Backend',
+		skills: ['Node.js', 'Python', 'SQL'],
+		icon: 'BE',
+	},
+	{
+		title: 'Design',
+		skills: ['Figma', 'CSS', 'Tailwind'],
+		icon: 'UI',
+	},
+	{
+		title: 'Tools',
+		skills: ['Git', 'Docker', 'AWS'],
+		icon: '⚙️',
+	},
+];
+
+const experiences = [
+	{
+		icon: '🎓',
+		title: 'Bachelor of Science in Computer Science',
+		company: 'Grand Valley State University',
+		date: '2018',
+		description: 'Focused on software engineering, algorithms, and web development. Graduated with honors and a passion for creating digital solutions.',
+	},
+	{
+		icon: '💼',
+		title: 'Technical Product Specialist',
+		company: 'Dynatrace',
+		date: '2018-2021',
+		description: 'Supported the Dynatrace product by providing technical assistance to customers and partners.',
+	},
+	{
+		icon: '💼',
+		title: 'Support Architect',
+		company: 'Dynatrace',
+		date: '2021-2022',
+		description: 'Created a support framework for the Dynatrace product to help support engineers.',
+	},
+];
+---
+
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} />
+	</head>
+	<body>
+		<Header />
+		<main class="w-[calc(100%)] max-w-full m-0 p-0">
+		
+		<!-- Hero Section -->
+		<section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+			<div class="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(35,55,255,0.15)_1px,transparent_0)] bg-[length:20px_20px]"></div>
+			<div class="relative z-10 w-full max-w-6xl mx-auto px-4 py-16">
+				<div class="grid lg:grid-cols-2 gap-12 items-center">
+					<!-- Profile Content -->
+					<div class="text-center lg:text-left">
+						<div class="mb-6">
+							<div set:html={marked(content.markdown)} />
+						</div>
+						
+						<!-- CTA Buttons -->
+						<div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+							<a href="#contact" class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl">
+								Get In Touch
+								<svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+								</svg>
+							</a>
+							<a href="/blog" class="inline-flex items-center justify-center px-8 py-4 border-2 border-gray-300 text-dark-cyan rounded-full font-semibold hover:border-gray-400 hover:bg-gray-50 transition-all duration-300">
+								Read My Blog
+							</a>
+						</div>
+					</div>
+					
+					<!-- Profile Image -->
+					<div class="relative">
+						<div class="relative z-10">
+                            <Image 
+                                width={headerImage.width} 
+                                height={headerImage.height} 
+                                src={headerImage.url} 
+                                alt="Profile picture" 
+                                class="w-full mx-auto rounded-3xl shadow-2xl"
+                            />
+						</div>
+						<!-- Decorative elements -->
+						<div class="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full opacity-20 blur-xl"></div>
+						<div class="absolute -bottom-8 -left-8 w-32 h-32 bg-gradient-to-tr from-pink-400 to-orange-400 rounded-full opacity-20 blur-xl"></div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<SkillsList skills={skills} />
+
+		<!-- Experience Timeline -->
+		<ExperienceTimeline experiences={experiences} />
+
+		<!-- Contact Section -->
+		<section id="contact" class="py-20 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600">
+			<div class="w-full max-w-4xl mx-auto px-4 text-center">
+				<h2 class="text-4xl font-bold text-white mb-6">Let's Work Together</h2>
+				<p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+					I'm always excited to discuss new opportunities, collaborate on interesting projects, or just chat about technology.
+				</p>
+				
+				<div class="flex flex-col sm:flex-row gap-6 justify-center items-center mb-8">
+					<a href="mailto:hello@example.com" class="inline-flex items-center justify-center px-8 py-4 bg-white text-gray-800 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 shadow-lg">
+						<svg class="mr-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+						</svg>
+						Send me an email
+					</a>
+					
+					<a href="/blog" class="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white rounded-full font-semibold hover:bg-white hover:text-gray-800 transition-all duration-300">
+						Read my latest post
+					</a>
+				</div>
+				
+				<div class="flex justify-center">
+					<div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
+						<SocialLinks />
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Main Content Slot -->
+		<main class="py-20 bg-white">
+			<div class="w-full max-w-4xl mx-auto px-4">
+				<div class="prose prose-lg max-w-none">
+					<slot />
+				</div>
+			</div>
+		</main>
+
+		<Footer />
+	</main>
+	</body>
+</html>

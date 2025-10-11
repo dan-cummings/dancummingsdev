@@ -3,28 +3,7 @@ const today = new Date();
 import SocialLinks from './SocialLinks.astro';
 ---
 
-<footer>
+<footer class="py-8 px-4 pb-24 bg-gradient-to-b from-gray-100/50 to-white text-dark-cyan text-center">
 	&copy; {today.getFullYear()} Daniel Cummings. All rights reserved.
 	<SocialLinks />
 </footer>
-<style>
-	footer {
-		padding: 2em 1em 6em 1em;
-		background: linear-gradient(var(--gray-gradient)) no-repeat;
-		color: rgb(var(--gray));
-		text-align: center;
-	}
-	.social-links {
-		display: flex;
-		justify-content: center;
-		gap: 1em;
-		margin-top: 1em;
-	}
-	.social-links a {
-		text-decoration: none;
-		color: rgb(var(--gray));
-	}
-	.social-links a:hover {
-		color: rgb(var(--gray-dark));
-	}
-</style>

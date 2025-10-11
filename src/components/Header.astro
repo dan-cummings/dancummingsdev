@@ -4,55 +4,57 @@ import HeaderLink from './HeaderLink.astro';
 import SocialLinks from './SocialLinks.astro';
 ---
 
-<header>
-	<nav>
-		<h2><a href="/">{SITE_TITLE}</a></h2>
+<header id="header" class="sticky top-0 z-50 m-0 px-4 bg-white shadow-[0_2px_8px_rgba(15,18,25,0.05)] transition-transform duration-300 ease-in-out">
+	<nav class="flex items-center justify-between">
+		<h2 class="text-base"><a href="/" class="no-underline">{SITE_TITLE}</a></h2>
 		<div class="internal-links">
-			<HeaderLink href="/">Home</HeaderLink>
+			<HeaderLink href="/">About</HeaderLink>
 			<HeaderLink href="/blog">Blog</HeaderLink>
-			<HeaderLink href="/about">About</HeaderLink>
 		</div>
 		<SocialLinks />
 	</nav>
 </header>
-<style>
-	header {
-		margin: 0;
-		padding: 0 1em;
-		background: white;
-		box-shadow: 0 2px 8px rgba(var(--black), 5%);
-	}
-	h2 {
-		margin: 0;
-		font-size: 1em;
+
+<script>
+	let lastScrollY = window.scrollY;
+	let isHeaderVisible = true;
+
+	function handleScroll() {
+		const currentScrollY = window.scrollY;
+		const header = document.getElementById('header');
+
+		if (!header) return;
+
+		// Only hide/show if scrolled more than 10px to avoid jitter
+		if (Math.abs(currentScrollY - lastScrollY) < 10) return;
+
+		if (currentScrollY > lastScrollY && currentScrollY > 100) {
+			// Scrolling down and past 100px - hide header
+			if (isHeaderVisible) {
+				header.style.transform = 'translateY(-100%)';
+				isHeaderVisible = false;
+			}
+		} else {
+			// Scrolling up - show header
+			if (!isHeaderVisible) {
+				header.style.transform = 'translateY(0)';
+				isHeaderVisible = true;
+			}
+		}
+
+		lastScrollY = currentScrollY;
 	}
 
-	h2 a,
-	h2 a.active {
-		text-decoration: none;
-	}
-	nav {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-	}
-	nav a {
-		padding: 1em 0.5em;
-		color: var(--black);
-		border-bottom: 4px solid transparent;
-		text-decoration: none;
-	}
-	nav a.active {
-		text-decoration: none;
-		border-bottom-color: var(--accent);
-	}
-	.social-links,
-	.social-links a {
-		display: flex;
-	}
-	@media (max-width: 720px) {
-		.social-links {
-			display: none;
+	let ticking = false;
+	function throttledScroll() {
+		if (!ticking) {
+			requestAnimationFrame(() => {
+				handleScroll();
+				ticking = false;
+			});
+			ticking = true;
 		}
 	}
-</style>
+	
+	window.addEventListener('scroll', throttledScroll, { passive: true });
+</script>
