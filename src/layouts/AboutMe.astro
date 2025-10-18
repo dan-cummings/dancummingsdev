@@ -6,13 +6,22 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import SocialLinks from '../components/SocialLinks.astro';
+import FormattedDate from '../components/FormattedDate.astro';
 import { marked } from 'marked';
 import SkillsList from '../components/SkillsList.astro';
 import ExperienceTimeline from '../components/ExperienceTimeline.astro';
+import Button from '../components/Button.astro';
+import { getCollection } from 'astro:content';
 
 type Props = CollectionEntry<'pages'>['data'];
 
 const { title, description, headerImage, content } = Astro.props;
+
+// Fetch recent blog posts (latest 3)
+const allPosts = await getCollection('blog');
+const recentPosts = allPosts
+	.sort((a, b) => b.data.createdAt.valueOf() - a.data.createdAt.valueOf())
+	.slice(0, 3);
 const skills = [
 	{
 		title: 'Frontend',
@@ -82,15 +91,15 @@ const experiences = [
 						
 						<!-- CTA Buttons -->
 						<div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-							<a href="#contact" class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl">
+							<Button href="#contact" variant="primary">
 								Get In Touch
 								<svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
 								</svg>
-							</a>
-							<a href="/blog" class="inline-flex items-center justify-center px-8 py-4 border-2 border-gray-300 text-dark-cyan rounded-full font-semibold hover:border-gray-400 hover:bg-gray-50 transition-all duration-300">
+							</Button>
+							<Button href="/blog" variant="secondary">
 								Read My Blog
-							</a>
+							</Button>
 						</div>
 					</div>
 					
@@ -113,6 +122,52 @@ const experiences = [
 			</div>
 		</section>
 
+		<!-- Recent Blog Posts Section -->
+		<section class="py-20 bg-gradient-to-b from-white to-gray-50">
+			<div class="w-full max-w-6xl mx-auto px-4">
+				<div class="text-center mb-12">
+					<h2 class="text-4xl font-bold text-gray-900 mb-4">Recent Blog Posts</h2>
+					<p class="text-xl text-gray-600">Latest thoughts and insights from my blog</p>
+				</div>
+
+				<div class="grid md:grid-cols-3 gap-8 mb-8">
+					{recentPosts.map((post) => (
+						<article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+							<a href={`/blog/${post.data.slug}/`} class="block no-underline">
+								{post.data.headerImage && (
+									<div class="aspect-video overflow-hidden">
+										<Image
+											width={400}
+											height={225}
+											src={post.data.headerImage.url}
+											alt={post.data.title}
+											class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+										/>
+									</div>
+								)}
+								<div class="p-6">
+									<h3 class="text-xl font-bold text-gray-900 mb-2 hover:text-blue-600 transition-colors">{post.data.title}</h3>
+									<p class="text-gray-600 mb-4">{post.data.description}</p>
+									<div class="flex items-center text-sm text-gray-500">
+										<FormattedDate date={new Date(post.data.createdAt)} />
+									</div>
+								</div>
+							</a>
+						</article>
+					))}
+				</div>
+
+				<div class="text-center">
+					<Button href="/blog" variant="secondary">
+						View All Posts
+						<svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+						</svg>
+					</Button>
+				</div>
+			</div>
+		</section>
+
 		<SkillsList skills={skills} />
 
 		<!-- Experience Timeline -->
@@ -127,16 +182,16 @@ const experiences = [
 				</p>
 				
 				<div class="flex flex-col sm:flex-row gap-6 justify-center items-center mb-8">
-					<a href="mailto:hello@example.com" class="inline-flex items-center justify-center px-8 py-4 bg-white text-gray-800 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 shadow-lg">
+					<Button href="mailto:hello@example.com" class="bg-white text-gray-800 hover:bg-gray-100">
 						<svg class="mr-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
 						</svg>
 						Send me an email
-					</a>
-					
-					<a href="/blog" class="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white rounded-full font-semibold hover:bg-white hover:text-gray-800 transition-all duration-300">
+					</Button>
+
+					<Button href="/blog" class="border-2 border-white text-white hover:bg-white hover:text-gray-800">
 						Read my latest post
-					</a>
+					</Button>
 				</div>
 				
 				<div class="flex justify-center">
