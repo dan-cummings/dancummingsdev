@@ -19,6 +19,29 @@ export default {
         'gray-light': 'rgb(229 233 240)',
         'gray-dark': 'rgb(34 41 57)',
       },
+      maxWidth: {
+        'prose': '720px',
+        'blog-grid': '960px',
+      },
+      boxShadow: {
+        'subtle': '0 2px 8px rgba(15, 18, 25, 0.05)',
+        'hover-sm': '0 2px 6px rgba(96, 115, 159, 0.25)',
+        'hover-md': '0 2px 6px rgba(96, 115, 159, 0.25), 0 8px 24px rgba(96, 115, 159, 0.33)',
+        'hover-lg': '0 2px 6px rgba(96, 115, 159, 0.25), 0 8px 24px rgba(96, 115, 159, 0.33), 0 16px 32px rgba(96, 115, 159, 0.33)',
+      },
+      backgroundImage: {
+        'hero-grid': 'radial-gradient(circle at 1px 1px, rgba(35, 55, 255, 0.15) 1px, transparent 0)',
+      },
+      backgroundSize: {
+        'grid': '20px 20px',
+      },
+      fontSize: {
+        'display-lg': '3.052rem',
+        'display-md': '2.441rem',
+        'display-sm': '1.953rem',
+        'heading-lg': '1.563rem',
+        'heading-md': '1.25rem',
+      },
     },
   },
   plugins: [],

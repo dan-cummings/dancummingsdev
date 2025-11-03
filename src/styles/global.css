@@ -1,22 +1,5 @@
 @import "tailwindcss";
 
-@theme {
-	/* Custom colors */
-	--color-sage: hsla(60, 23%, 73%, 1);
-	--color-sunset: hsla(37, 76%, 73%, 1);
-	--color-tan: hsla(35, 39%, 65%, 1);
-	--color-dark-cyan: hsla(187, 24%, 44%, 1);
-	--color-rose-taupe: hsla(336, 12%, 44%, 1);
-	
-	/* Custom design tokens */
-	--color-accent: #2337ff;
-	--color-accent-dark: #000d8a;
-	--color-black: 15 18 25;
-	--color-gray: 96 115 159;
-	--color-gray-light: 229 233 240;
-	--color-gray-dark: 34 41 57;
-}
-
 @font-face {
 	font-family: "Atkinson";
 	src: url("/fonts/atkinson-regular.woff") format("woff");
@@ -33,72 +16,92 @@
 	font-display: swap;
 }
 
+/* Reusable component classes */
+@layer components {
+	.btn-primary {
+		@apply inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl;
+	}
+
+	.btn-secondary {
+		@apply inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white rounded-full font-semibold hover:bg-white hover:text-gray-800 transition-all duration-300;
+	}
+
+	.btn-outline {
+		@apply inline-flex items-center justify-center px-8 py-4 border-2 border-gray-300 rounded-full font-semibold hover:border-gray-400 hover:bg-gray-50 transition-all duration-300;
+		color: hsla(187, 24%, 44%, 1);
+	}
+
+	.card {
+		@apply bg-white p-6 rounded-2xl shadow-lg border border-gray-100 transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl;
+	}
+}
+
 /* Override Tailwind's base styles to match original design */
 @layer base {
 	/* Reset body styles to match original design */
 	body {
-		font-family: "Atkinson", sans-serif !important;
-		margin: 0 !important;
-		padding: 0 !important;
-		text-align: left !important;
-		background: linear-gradient(rgba(var(--color-gray-light), 0.5), #fff) no-repeat !important;
-		background-size: 100% 600px !important;
-		word-wrap: break-word !important;
-		overflow-wrap: break-word !important;
-		color: var(--color-dark-cyan) !important;
-		font-size: 18px !important;
-		line-height: 1.7 !important;
+		font-family: "Atkinson", sans-serif;
+		margin: 0;
+		padding: 0;
+		text-align: left;
+		background: linear-gradient(rgba(229, 233, 240, 0.5), #fff) no-repeat;
+		background-size: 100% 600px;
+		word-wrap: break-word;
+		overflow-wrap: break-word;
+		color: hsl(187, 24%, 44%);
+		font-size: 18px;
+		line-height: 1.7;
 	}
 
 	/* Default main styles for pages that don't override with Tailwind classes */
 	main {
-		width: 720px;
+		max-width: 720px;
 	}
 
 	/* Typography overrides to match original design */
 	h1, h2, h3, h4, h5, h6 {
-		margin: 0 0 0.5rem 0 !important;
-		color: rgb(var(--color-black)) !important;
-		line-height: 1.2 !important;
-		font-family: "Atkinson", sans-serif !important;
+		margin: 0 0 0.5rem 0;
+		color: rgb(15 18 25);
+		line-height: 1.2;
+		font-family: "Atkinson", sans-serif;
 	}
 
 	h1 {
-		font-size: 3.052em !important;
+		font-size: 3.052rem;
 	}
 
 	h2 {
-		font-size: 2.441em !important;
+		font-size: 2.441rem;
 	}
 
 	h3 {
-		font-size: 1.953em !important;
+		font-size: 1.953rem;
 	}
 
 	h4 {
-		font-size: 1.563em !important;
+		font-size: 1.563rem;
 	}
 
 	h5 {
-		font-size: 1.25em !important;
+		font-size: 1.25rem;
 	}
 
 	/* Link styles to match original design */
 	a {
-		color: var(--color-dark-cyan) !important;
+		color: hsl(187, 24%, 44%);
 	}
 
 	a:hover {
-		color: hsla(187, 24%, 34%, 1) !important;
+		color: hsl(187, 24%, 34%);
 	}
 
 	/* Paragraph styles */
 	p {
-		margin-bottom: 1em !important;
+		margin-bottom: 1em;
 	}
 
 	.prose p {
-		margin-bottom: 2em !important;
+		margin-bottom: 2em;
 	}
 
 	/* Form elements */
@@ -126,7 +129,7 @@
 	/* Code styles */
 	code {
 		padding: 2px 5px;
-		background-color: rgb(var(--color-gray-light));
+		background-color: rgb(229 233 240);
 		border-radius: 2px;
 	}
 
@@ -141,7 +144,7 @@
 
 	/* Blockquote styles */
 	blockquote {
-		border-left: 4px solid var(--color-accent);
+		border-left: 4px solid #2337ff;
 		padding: 0 0 0 20px;
 		margin: 0px;
 		font-size: 1.333em;
@@ -150,12 +153,12 @@
 	/* HR styles */
 	hr {
 		border: none;
-		border-top: 1px solid rgb(var(--color-gray-light));
+		border-top: 1px solid rgb(229 233 240);
 	}
 
 	/* Strong/Bold styles */
 	strong, b {
-		font-weight: 700 !important;
+		font-weight: 700;
 	}
 }
 
@@ -163,7 +166,7 @@
 @media (max-width: 720px) {
 	@layer base {
 		body {
-			font-size: 18px !important;
+			font-size: 18px;
 		}
 	}
 }
@@ -172,7 +175,7 @@
 	border: 0;
 	padding: 0;
 	margin: 0;
-	position: absolute !important;
+	position: absolute;
 	height: 1px;
 	width: 1px;
 	overflow: hidden;
