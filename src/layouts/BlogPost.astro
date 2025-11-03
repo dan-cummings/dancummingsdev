@@ -19,12 +19,12 @@ const { title, description, createdAt, updatedDate, headerImage } = Astro.props;
 
 	<body>
 		<Header />
-		<main class="w-[calc(100%-2rem)] max-w-full m-0">
+		<main class="w-full max-w-full m-0 px-4">
 			<article>
 				<div class="w-full">
-					{headerImage && <Image width={1020} height={510} src={headerImage.url} alt="" class="block mx-auto rounded-xl shadow-[0_2px_6px_rgba(96,115,159,0.25),0_8px_24px_rgba(96,115,159,0.33),0_16px_32px_rgba(96,115,159,0.33)]" />}
+					{headerImage && <Image width={1020} height={510} src={headerImage.url} alt="" class="block mx-auto rounded-xl shadow-hover-lg" />}
 				</div>
-				<div class="w-[720px] max-w-[calc(100%-2rem)] mx-auto p-4 text-dark-cyan">
+				<div class="max-w-prose mx-auto p-4 text-dark-cyan">
 					<div class="mb-4 py-4 text-center leading-tight">
 						<div class="mb-2 text-dark-cyan">
 							<FormattedDate date={createdAt} />

@@ -19,20 +19,20 @@ const posts = (await getCollection('blog')).sort(
 	</head>
 	<body>
 		<Header />
-		<main class="w-[960px] max-w-[calc(100%-2rem)] mx-auto">
+		<main class="max-w-blog-grid mx-auto px-4">
 			<section>
 				<ul class="flex flex-wrap gap-8 list-none m-0 p-0">
 					{
 						posts.map((post, index) => (
-							<li class={`${index === 0 ? 'w-full mb-4 text-center' : 'w-[calc(50%-1rem)]'}`}>
+							<li class={`${index === 0 ? 'w-full mb-4 text-center' : 'w-full sm:w-[calc(50%-1rem)]'}`}>
 								<a href={`/blog/${post.data.slug}/`} class="block no-underline transition-all duration-200 ease-in-out">
 									{post.data.headerImage && (
-										<Image 
-											width={720} 
-											height={360} 
-											src={post.data.headerImage.url} 
-											alt="" 
-											class={`${index === 0 ? 'w-full' : ''} mb-2 rounded-xl hover:shadow-[0_2px_6px_rgba(96,115,159,0.25),0_8px_24px_rgba(96,115,159,0.33),0_16px_32px_rgba(96,115,159,0.33)] transition-shadow duration-200`}
+										<Image
+											width={720}
+											height={360}
+											src={post.data.headerImage.url}
+											alt=""
+											class={`${index === 0 ? 'w-full' : ''} mb-2 rounded-xl hover:shadow-hover-lg transition-shadow duration-200`}
 										/>
 									)}
 									<h4 class={`m-0 text-black leading-tight ${index === 0 ? 'text-4xl' : ''}`}>{post.data.title}</h4>
