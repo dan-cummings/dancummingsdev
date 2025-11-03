@@ -27,7 +27,8 @@
 	}
 
 	.btn-outline {
-		@apply inline-flex items-center justify-center px-8 py-4 border-2 border-gray-300 text-dark-cyan rounded-full font-semibold hover:border-gray-400 hover:bg-gray-50 transition-all duration-300;
+		@apply inline-flex items-center justify-center px-8 py-4 border-2 border-gray-300 rounded-full font-semibold hover:border-gray-400 hover:bg-gray-50 transition-all duration-300;
+		color: hsla(187, 24%, 44%, 1);
 	}
 
 	.card {
