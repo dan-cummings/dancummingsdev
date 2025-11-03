@@ -32,6 +32,9 @@ jobs:
         run: npm test --if-present
         continue-on-error: false
 
+      - name: Create .env file
+        run: echo "HYGRAPH_ENDPOINT=${{ vars.HYGRAPH_ENDPOINT }}" > .env
+
       - name: Build application
         run: npm run build
 
